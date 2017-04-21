@@ -8,7 +8,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 
 // DB SetUp
-mongoose.connect('mongodb://localhost:auth/auth');
+mongoose.connect('mongodb://localhost:activities/activities');
 
 // Create our app - an instance of express
 const app = express();

@@ -1,32 +1,29 @@
 const mongoose = require ('mongoose');
 const Schema = mongoose.Schema;
-const bcrypt = require('bcrypt-nodejs');
+
+// Define user info object to be used repeatedly in schema
+const userInfo = {
+  userName: { type: String, lowercase: true },
+    userFullName: String,
+    userEmail: { type: String, lowercase: true}
+  };
 
 // Define  model
 const activitySchema = new Schema({
   createDate: { required: true, type: Date, default: Date.now },
-  user: {
-    userName: { type: String, lowercase: true },
-    userFullName: String,
-    userEmail: { type: String, lowercase: true}
-  },
+  user: userInfo,
   type: { type: String,
           enum: {
             values: ['Vote', 'Message'],
             message: 'enum validator failed for path `{PATH}` with value `{VALUE}`' } },
   value: { type: Number, required: false },
   message: { type: String, required: false },
+  likes: [{ likeDate: { type: Date, default: Date.now },
+            user: userInfo }],
+  attachment: Buffer,
   comments: [{
     createDate: { required: true, type: Date, default: Date.now },
-    user: {
-      userName: { type: String, lowercase: true },
-      userFullName: String,
-      userEmail: { type: String, lowercase: true}
-    },
-    type: { type: String,
-            enum: {
-              values: ['Vote', 'Message'],
-              message: 'enum validator failed for path `{PATH}` with value `{VALUE}`' } },
+    user: userInfo,
     message: { type: String, required: false },
     }]
   }

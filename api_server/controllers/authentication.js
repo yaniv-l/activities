@@ -48,7 +48,5 @@ exports.signup = function(req, res, next) {
       // send back a success indications
       res.json({ success: true, token: tokenForUser(user) });
     })
-
-
   });
 }

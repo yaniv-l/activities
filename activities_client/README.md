@@ -1,4 +1,4 @@
-# activities client auth
+# activities client
 Client app for the activities.
 Based on ReactJS, Redux, redux-form, redux-thunk.
 Authentication is beased on JWT.
