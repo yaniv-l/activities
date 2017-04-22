@@ -16,4 +16,6 @@ module.exports = function(app) {
 
   // Acticity routes
   app.post('/post', Activities.postNewActivity);
+  app.post('/addLike', Activities.addLike);
+  app.post('/addComment', Activities.addComment);
 };
