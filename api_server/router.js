@@ -18,4 +18,5 @@ module.exports = function(app) {
   app.post('/post', Activities.postNewActivity);
   app.post('/addLike', Activities.addLike);
   app.post('/addComment', Activities.addComment);
+  app.get('/getAllFeeds', Activities.getAllFeeds);
 };

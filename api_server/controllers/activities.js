@@ -24,22 +24,35 @@ exports.addComment = function(req, res, next) {
   pushArrayItem('comments', req, res, next);
 }
 
+exports.getAllFeeds = function(req, res, next) {
+  Activity.find().sort({ createDate: -1 })
+    .exec(function(err, activityFeeds) {
+      if (err){
+        return next(err);
+      }
+      else{
+        res.json(activityFeeds);
+      }
+    })
+
+}
+
 function pushArrayItem(arrayName, req, res, next) {
   // Create activity object
   const activity = new Activity(req.body);
 
-  console.log(`${arrayName} body is: `);  // For Debug
-  console.log(req.body);  // For Debug
+  // console.log(`${arrayName} body is: `);  // For Debug
+  // console.log(req.body);  // For Debug
 
   const _id = activity._id;
   const item = activity[arrayName][0];
-  console.log(`Item content of ${arrayName} is: `);  // For Debug
-  console.log(item);  // For Debug
+  // console.log(`Item content of ${arrayName} is: `);  // For Debug
+  // console.log(item);  // For Debug
 
   // Check we have required info
   if (!_id || !item){
     return res.status(402).send({ success: false,
-      error: 'Like can only be applied on existing post and requires user info'});
+      error: `${arrayName} can only be applied on existing post and requires user info`});
   }
 
   // Locate the required post doc to update
